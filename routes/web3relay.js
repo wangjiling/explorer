@@ -13,6 +13,35 @@ var etherUnits = require(__lib + "etherUnits.js")
 var extractTX = require('./filters').extractTX;
 var getLatestBlocks = require('./index').getLatestBlocks;
 
+// load config
+var fs = require('fs');
+var config = {};
+
+try {
+    var configContents = fs.readFileSync('config.json');
+    config = JSON.parse(configContents);
+}
+catch (error) {
+    if (error.code === 'ENOENT') {
+        console.log('No config file found. Using default configuration (will ' +
+            'download all blocks starting from latest)');
+    }
+    else {
+        throw error;
+        process.exit(1);
+    }
+}
+
+// set default geth host if it's not provided
+if (!('gethHost' in config) || (typeof config.gethHost) !== 'string') {
+    config.gethHost = 'localhost'; // default
+}
+
+
+// set the default geth port if it's not provided
+if (!('gethPort' in config) || (typeof config.gethPort) !== 'number') {
+    config.gethPort = 4444; // default
+}
 
 if (typeof web3 !== "undefined") {
   web3 = new Web3(web3.currentProvider);
