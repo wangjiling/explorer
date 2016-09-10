@@ -28,13 +28,14 @@ Ubuntu: `sudo apt-get install -y mongodb-org`
 
 This will fetch and parse the entire blockchain.
 
-Configuration file: `/tools/config.json`
+Example configuration file: `/tools/config.json`
 
 Basic settings:
 ```json
 {
-    "gethPort": 8545, 
-    "blocks": [ {"start": 2000000, "end": "latest"}],
+	"gethHost": "mynode.com",
+    "gethPort": 4444, 
+    "blocks": [ {"start": 2000, "end": "latest"}],
     "quiet": false,
     "terminateAtExistingDB": true,
     "listenOnly": false
@@ -63,4 +64,8 @@ Leave this running in the background to continuously fetch new blocks.
 
 Tools for updating network stats are under development, but can be found in:
 
-`./tools/stats.js` 
+`node ./tools/stats.js` 
+
+### WebApp:
+
+`node app.js`

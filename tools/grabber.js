@@ -11,7 +11,7 @@ var mongoose = require( 'mongoose' );
 var Block     = mongoose.model( 'Block' );
 
 var grabBlocks = function(config) {
-    var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:' + 
+    var web3 = new Web3(new Web3.providers.HttpProvider('http://' + config.gethHost.toString() + ':' + 
         config.gethPort.toString()));
 
 
@@ -161,7 +161,7 @@ var checkBlockDBExistsThenWrite = function(config, blockData) {
   Patch Missing Blocks
 */
 var patchBlocks = function(config) {
-    var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:' + 
+    var web3 = new Web3(new Web3.providers.HttpProvider('http://' + config.gethHost.toString() + ':' + 
         config.gethPort.toString()));
 
     // number of blocks should equal difference in block numbers
@@ -224,9 +224,15 @@ catch (error) {
     }
 }
 
+// set default geth host if it's not provided
+if (!('gethHost' in config) || (typeof config.gethHost) !== 'string') {
+    config.gethHost = 'localhost'; // default
+}
+
+
 // set the default geth port if it's not provided
 if (!('gethPort' in config) || (typeof config.gethPort) !== 'number') {
-    config.gethPort = 8545; // default
+    config.gethPort = 4444; // default
 }
 
 // set the default output directory if it's not provided
