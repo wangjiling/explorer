@@ -4,17 +4,22 @@
 
 var Web3 = require('web3');
 
-var mongoose = require( 'mongoose' );
-var BlockStat = require( '../db-stats.js' ).BlockStat;
+var fs = require('fs');
+var mongoose = require('mongoose');
+var BlockStat = require('../db-stats.js').BlockStat;
 
-var updateStats = function() {
-    var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545')); 
+var updateStats = function(config) {
+    var web3 = new Web3(new Web3.providers.HttpProvider('http://' + config.gethHost.toString() + ':' + config.gethPort.toString()));
 
     mongoose.connect( 'mongodb://localhost/blockDB' );
     mongoose.set('debug', true);
 
     var latestBlock = web3.eth.blockNumber;
     getStats(web3, latestBlock, null, latestBlock - 1000);
+
+    mongoose.connection.close(function () {
+      console.log('Mongoose connection disconnected');
+    });
 }
 
 
@@ -92,9 +97,40 @@ var checkBlockDBExistsThenWrite = function(web3, blockData, nextTime) {
 /** On Startup **/
 // geth --rpc --rpcaddr "localhost" --rpcport "8545"  --rpcapi "eth,net,web3"
 
+var config = {};
+
+try {
+    var configContents = fs.readFileSync('config.json');
+    config = JSON.parse(configContents);
+}
+catch (error) {
+    if (error.code === 'ENOENT') {
+        console.log('No config file found. Using default configuration (will ' + 
+            'download all blocks starting from latest)');
+    }
+    else {
+        throw error;
+        process.exit(1);
+    }
+}
+
+// set default geth host if it's not provided
+if (!('gethHost' in config) || (typeof config.gethHost) !== 'string') {
+    config.gethHost = 'localhost'; // default
+}
+
+
+// set the default geth port if it's not provided
+if (!('gethPort' in config) || (typeof config.gethPort) !== 'number') {
+    config.gethPort = 4444; // default
+}
+
+console.log('Using configuration:');
+console.log(config);
+
 var minutes = 1;
 statInterval = minutes * 60 * 1000;
 
 setInterval(function() {
-  updateStats();
+  updateStats(config);
 }, statInterval);
