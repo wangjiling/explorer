@@ -1,16 +1,10 @@
-# ETCExplorer 
-
-<b>Production: [etherhub.io](http://etherhub.io)</b>
-
-<b>Staging server: [unforked.info](http://unforked.info)</b>
-
-Follow the project progress at: [ETC Block Explorer Development](https://trello.com/b/W3ftl57z/etc-block-explorer-development) 
+# RSKExplorer 
 
 ## Local installation
 
 Clone the repo
 
-`git clone https://github.com/ethereumproject/explorer`
+`git clone https://github.com/rootstock/rsk-block-explorer`
 
 Download [Nodejs and npm](https://docs.npmjs.com/getting-started/installing-node "Nodejs install") if you don't have them
 
