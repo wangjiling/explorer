@@ -11,7 +11,7 @@ module.exports = function(app){
   else
     var web3relay = require('./web3relay');
 
-  var DAO = require('./dao');
+  //var DAO = require('./dao');
 
   var compile = require('./compiler');
   var fiat = require('./fiat');
@@ -167,7 +167,7 @@ var sendTxs = function(data, res) {
   res.end();
 }
 
-const MAX_ENTRIES = 10;
+const MAX_ENTRIES = 20;
 
 const DATA_ACTIONS = {
   "latest_blocks": sendBlocks,
