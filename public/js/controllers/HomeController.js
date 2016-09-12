@@ -38,6 +38,7 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
     $scope.txLoading = false;
     $scope.blockLoading = false;
 })
+/*
 .directive('summaryStats', function($http) {
   return {
     restrict: 'E',
@@ -78,5 +79,5 @@ angular.module('BlocksApp').controller('HomeController', function($rootScope, $s
 
       }
   }
-});
-
+}); 
+*/
