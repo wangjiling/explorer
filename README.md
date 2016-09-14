@@ -62,4 +62,9 @@ Tools for updating network stats are under development, but can be found in:
 
 ### WebApp:
 
-`node app.js`
+```bash
+export NODE_ENV="{ENV}" 
+node app.js
+```
+
+NODE_ENV can be deveploment for dummy data or another string for real data.
