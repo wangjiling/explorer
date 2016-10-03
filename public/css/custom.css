@@ -1,7 +1,9 @@
 div.page-logo {overflow: visible;}
 img.logo-default {
-    max-height: 150px;
-    height: 100px;
+    max-height: 150%;
+    height: auto;
+    max-width: 75%;
+    display: block;
 }
 .truncate-txhash, .truncate-addrhash{
     white-space:nowrap; 
