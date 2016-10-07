@@ -88,7 +88,7 @@ exports.data = function(req, res){
         addrData["balance"] = web3.eth.getBalance(addr);  
         addrData["balance"] = etherUnits.toEther(addrData["balance"], 'wei');
       } catch(err) {
-        console.error("AddrWeb3 error :" + err);
+        console.error("AddrWeb3 error retrieving balance :" + err);
         addrData = {"error": true};
       }
     }
@@ -96,7 +96,7 @@ exports.data = function(req, res){
       try {
          addrData["count"] = web3.eth.getTransactionCount(addr);
       } catch (err) {
-        console.error("AddrWeb3 error :" + err);
+        console.error("AddrWeb3 error retrieving transaction count :" + err);
         addrData = {"error": true};
       }
     }
@@ -108,11 +108,14 @@ exports.data = function(req, res){
          else
             addrData["isContract"] = false;
       } catch (err) {
-        console.error("AddrWeb3 error :" + err);
+        console.error("AddrWeb3 error retrieving bytecode :" + err);
         addrData = {"error": true};
       }
     }
    
+    console.log('web3relay response');
+	console.log(JSON.stringify(addrData));
+	
     res.write(JSON.stringify(addrData));
     res.end();
 

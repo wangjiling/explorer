@@ -18,6 +18,13 @@
           <tr ><td width="25%">Gas Used</td><td>{{block.gasUsed | number}}</td></tr>
           <tr ><td width="25%">nonce</td><td>{{block.nonce}}</td></tr>
           <tr ><td width="25%">Extra Data</td><td>{{block.extraData}}</td></tr>
+          <tr ng-show="block.ntransactions"><td width="25%">Transactions</td>
+		  <td>
+		  <div ng-repeat="tx in block.transactions">
+		  <a href="/tx/{{tx.hash}}">{{tx.hash}}</a>
+		  </div>
+		  </td>
+		  </tr>
         </table>
     </div>
     <!--TODO: calculate block reward -->
