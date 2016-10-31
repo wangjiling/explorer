@@ -24,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app libraries
 global.__lib = __dirname + '/lib/';
 
-
 // client
 
 app.get('/', function(req, res) {

@@ -1,7 +1,9 @@
-div.page-logo {overflow: visible;}
+div.page-logo {overflow: visible; z-index: 2; }
 img.logo-default {
-    max-height: 150px;
-    height: 100px;
+    max-height: 150%;
+    height: auto;
+    max-width: 100%;
+    display: block;
 }
 .truncate-txhash, .truncate-addrhash{
     white-space:nowrap; 
@@ -13,7 +15,7 @@ img.logo-default {
     max-width:200px;   
 }
 .scrollable {
-    max-height: 400px;
+    max-height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
 }

@@ -226,7 +226,7 @@ BlocksApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvide
             }
         })
 
-        .state('dao', {
+/*        .state('dao', {
             url: "/dao",
             templateUrl: "views/dao.html",
             data: {pageTitle: 'theDAO'},
@@ -242,7 +242,7 @@ BlocksApp.config(['$stateProvider', '$urlRouterProvider', function($stateProvide
                     });
                 }]
             }
-        })
+        }) */
 
         .state('err404', {
             url: "/err404/{thing}/{hash}",

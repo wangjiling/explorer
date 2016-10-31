@@ -3,6 +3,12 @@ logs
 *.log
 npm-debug.log*
 
+# Nohup
+.nohup
+
+# Config
+config.json
+
 # Runtime data
 pids
 *.pid
@@ -38,3 +44,6 @@ jspm_packages
 
 # local data
 data/
+
+# XMLHttpRequest
+.node*

@@ -13,11 +13,40 @@ var etherUnits = require(__lib + "etherUnits.js")
 var extractTX = require('./filters').extractTX;
 var getLatestBlocks = require('./index').getLatestBlocks;
 
+// load config
+var fs = require('fs');
+var config = {};
+
+try {
+    var configContents = fs.readFileSync('config.json');
+    config = JSON.parse(configContents);
+}
+catch (error) {
+    if (error.code === 'ENOENT') {
+        console.log('No config file found. Using default configuration (will ' +
+            'download all blocks starting from latest)');
+    }
+    else {
+        throw error;
+        process.exit(1);
+    }
+}
+
+// set default geth host if it's not provided
+if (!('gethHost' in config) || (typeof config.gethHost) !== 'string') {
+    config.gethHost = 'localhost'; // default
+}
+
+
+// set the default geth port if it's not provided
+if (!('gethPort' in config) || (typeof config.gethPort) !== 'number') {
+    config.gethPort = 4444; // default
+}
 
 if (typeof web3 !== "undefined") {
   web3 = new Web3(web3.currentProvider);
 } else {
-  web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+  var web3 = new Web3(new Web3.providers.HttpProvider('http://' + config.gethHost.toString() + ':' + config.gethPort.toString()));
 }
 
 if (web3.isConnected()) 
@@ -59,7 +88,7 @@ exports.data = function(req, res){
         addrData["balance"] = web3.eth.getBalance(addr);  
         addrData["balance"] = etherUnits.toEther(addrData["balance"], 'wei');
       } catch(err) {
-        console.error("AddrWeb3 error :" + err);
+        console.error("AddrWeb3 error retrieving balance :" + err);
         addrData = {"error": true};
       }
     }
@@ -67,7 +96,7 @@ exports.data = function(req, res){
       try {
          addrData["count"] = web3.eth.getTransactionCount(addr);
       } catch (err) {
-        console.error("AddrWeb3 error :" + err);
+        console.error("AddrWeb3 error retrieving transaction count :" + err);
         addrData = {"error": true};
       }
     }
@@ -79,11 +108,14 @@ exports.data = function(req, res){
          else
             addrData["isContract"] = false;
       } catch (err) {
-        console.error("AddrWeb3 error :" + err);
+        console.error("AddrWeb3 error retrieving bytecode :" + err);
         addrData = {"error": true};
       }
     }
    
+    console.log('web3relay response');
+	console.log(JSON.stringify(addrData));
+	
     res.write(JSON.stringify(addrData));
     res.end();
 
