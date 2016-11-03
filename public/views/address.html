@@ -27,9 +27,6 @@
         <li ng-class="{active: activeTab == 'tab_addr_1' || !activeTab}">
           <a href="#tab_addr_1" data-toggle="tab" aria-expanded="true"> Transactions </a>
         </li>
-        <li class="" ng-show="addr.isContract" ng-class="{active: activeTab == 'tab_addr_3'}">
-          <a href="#tab_addr_3" data-toggle="tab" aria-expanded="false"> Contract Source </a>
-        </li>
       </ul>
       <div class="tab-content">
         <div class="tab-pane table-container" ng-class="{active: activeTab == 'tab_addr_1' || !activeTab}" id="tab_addr_1"><!-- Datatable tab -->

@@ -20,7 +20,7 @@ angular.module('BlocksApp').controller('AddressController', function($stateParam
       console.log(data)
       $scope.addr = data;
       if (data.isContract) {
-        $rootScope.$state.current.data["pageTitle"] = "Contract Address";
+        $rootScope.$state.current.data["pageTitle"] = "Address";
       }
     });
 
