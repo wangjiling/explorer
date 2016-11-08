@@ -1,4 +1,4 @@
-# RSKExplorer 
+# RSK Block Explorer 
 
 <b>Live Version: [explorer.rsk.co](https://explorer.rsk.co)</b>
 

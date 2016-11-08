@@ -1,9 +1,9 @@
 {
-  "name": "EthereumClassicExplorer",
+  "name": "RSK Block Explorer",
   "private": false,
   "version": "0.1.0",
-  "description": "A lightweight ethereum classic block explorer",
-  "repository": "https://github.com/ethereumproject/explorer",
+  "description": "A lightweight RSK block explorer",
+  "repository": "https://github.com/rootstock/explorer",
   "license": "MIT",
   "dependencies": {
     "bignumber.js": "^2.4.0",
